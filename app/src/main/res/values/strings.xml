@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SQLiteForAndroidKotlin</string>
-    <string name="CustomerName">Customer Name</string>
-    <string name="CustomerAge">Age</string>
-    <string name="CustomeActive">Active Customer</string>
+    <string name="CustomerName">Nome do Cliente</string>
+    <string name="CustomerAge">Idade</string>
+    <string name="CustomeActive">Cliente Ativo</string>
+    <string name="DadosClienteView">Dados do Cliente</string>
 </resources>

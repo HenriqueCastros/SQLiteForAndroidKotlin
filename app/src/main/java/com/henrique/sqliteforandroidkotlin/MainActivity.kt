@@ -1,5 +1,6 @@
 package com.henrique.sqliteforandroidkotlin
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewParent
@@ -55,8 +56,11 @@ class MainActivity : AppCompatActivity() {
 
         lv_customerList.setOnItemClickListener{parent, view, position, id ->
             val element = parent.getItemAtPosition(position) as CustomerModel
-            dao.deleteOne(element)
-            showCustomers(dao)
+//            dao.deleteOne(element)
+//            showCustomers(dao)
+            val myIntent = Intent(view.context, EditScreen::class.java)
+            myIntent.putExtra("ID_CLIENTE",element.id.toString() )
+            startActivity(myIntent)
         }
     }
 

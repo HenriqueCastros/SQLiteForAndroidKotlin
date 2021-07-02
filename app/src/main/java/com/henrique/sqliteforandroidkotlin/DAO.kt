@@ -72,4 +72,25 @@ class DAO:SQLiteOpenHelper {
         db.close()
         return returnList
     }
+    fun getOne(id : Int) : CustomerModel?{
+        var cliente:CustomerModel? = null
+        val queryString = "SELECT * FROM $CUSTOMER_TABLE WHERE $COL_ID = $id"
+        val db = this.readableDatabase
+        val cursor =db.rawQuery(queryString, null)
+
+        if (cursor.moveToFirst()){
+            do {
+                val customerId = cursor.getInt(0)
+                val customerName = cursor.getString(1)
+                val customerAge = cursor.getInt(2)
+                val customerActive = cursor.getInt(3) != 0
+
+                cliente = CustomerModel(customerId, customerName,customerAge,customerActive)
+            }while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+        return cliente
+    }
 }
