@@ -72,6 +72,7 @@ class DAO:SQLiteOpenHelper {
         db.close()
         return returnList
     }
+
     fun getOne(id : Int) : CustomerModel?{
         var cliente:CustomerModel? = null
         val queryString = "SELECT * FROM $CUSTOMER_TABLE WHERE $COL_ID = $id"
@@ -92,5 +93,23 @@ class DAO:SQLiteOpenHelper {
         cursor.close()
         db.close()
         return cliente
+    }
+
+    fun updateCliente(cliente : CustomerModel):Boolean{
+        val db = this.writableDatabase
+        val queryString = "UPDATE $CUSTOMER_TABLE " +
+                "SET $COL_CUSTOMER_NAME = ?, " +
+                " $COL_CUSTOMER_AGE = ?, " +
+                " $COL_ACTIVER_CUSTOMER = ? " +
+                "WHERE $COL_ID = ?;"
+        val statement = db.compileStatement(queryString)
+        statement.bindString(1, cliente.name)
+        statement.bindLong(2, cliente.age.toLong())
+
+        val isActive = if(cliente.isActive) 1 else 0
+        statement.bindLong(3, isActive.toLong())
+        statement.bindLong(4, cliente.id.toLong())
+
+        return statement.executeUpdateDelete() > 0
     }
 }
