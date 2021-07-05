@@ -56,8 +56,6 @@ class MainActivity : AppCompatActivity() {
 
         lv_customerList.setOnItemClickListener{parent, view, position, id ->
             val element = parent.getItemAtPosition(position) as CustomerModel
-//            dao.deleteOne(element)
-//            showCustomers(dao)
             val myIntent = Intent(view.context, EditScreen::class.java)
             myIntent.putExtra("ID_CLIENTE",element.id.toString() )
             startActivity(myIntent)

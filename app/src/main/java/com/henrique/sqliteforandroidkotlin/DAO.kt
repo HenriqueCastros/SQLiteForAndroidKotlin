@@ -16,12 +16,15 @@ class DAO:SQLiteOpenHelper {
 
     constructor(context: Context) : super(context, "customer.db", null, 1)
 
+    //Chamado quando o banco de dados e' acessado pela primeira vez
     override fun onCreate(db: SQLiteDatabase) {
         val queryString = "CREATE TABLE $CUSTOMER_TABLE ($COL_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "$COL_CUSTOMER_NAME TEXT, $COL_CUSTOMER_AGE INT, $COL_ACTIVER_CUSTOMER BOOL)"
         db.execSQL(queryString)
+        //execSQL -> Usado para comandos que nao sao de SEELCT/INSERT/UPDATE/DELETE
     }
 
+    //Chamado quando a versao do banco de dados muda
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         TODO("Not yet implemented")
     }
@@ -57,6 +60,7 @@ class DAO:SQLiteOpenHelper {
         val cursor =db.rawQuery(queryString, null)
 
         if (cursor.moveToFirst()){
+            //Loopar sobre o cursor (result set) e adicionar a resultList
             do {
                 val customerId = cursor.getInt(0)
                 val customerName = cursor.getString(1)
