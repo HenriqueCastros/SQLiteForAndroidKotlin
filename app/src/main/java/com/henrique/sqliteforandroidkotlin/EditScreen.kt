@@ -43,18 +43,20 @@ class EditScreen : AppCompatActivity() {
 
             if (cliente != null) {
                 if(dao.updateCliente(novoCliente))
-                    Toast.makeText(this@EditScreen, "Cliente Atualizado!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@EditScreen, "Customer's was updated!", Toast.LENGTH_SHORT).show()
                 else
                     Toast.makeText(this@EditScreen, "Algo de inesperado aconteceu", Toast.LENGTH_SHORT).show()
             }
+            this.onBackPressed()
         })
 
         btn_Delete.setOnClickListener(View.OnClickListener {
             val cliente: CustomerModel? = dao.getOne(idCliente.toInt())
             if (cliente != null) {
                 dao.deleteOne(cliente)
-                Toast.makeText(this@EditScreen, "Cliente excluido!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@EditScreen, "Customer was deleted!", Toast.LENGTH_SHORT).show()
             }
+            this.onBackPressed()
         })
 
     }
